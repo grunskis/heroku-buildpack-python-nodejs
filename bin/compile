@@ -244,6 +244,15 @@ bpwatch start dump_cache
   done
 bpwatch stop dump_cache
 
+bpwatch start nodejs
+  source $BIN_DIR/compile-nodejs "$@"
+bpwatch stop nodejs
+
+# Django collectstatic support.
+bpwatch start collectstatic
+  source $BIN_DIR/steps/collectstatic
+bpwatch stop collectstatic
+
 # ### Fin.
 bpwatch start appdir_commit
   deep-mv $BUILD_DIR $ORIG_BUILD_DIR
@@ -254,14 +263,5 @@ bpwatch start anvil_appdir_commit
     deep-mv $TMP_APP_DIR $APP_DIR
   fi
 bpwatch stop anvil_appdir_commit
-
-bpwatch start nodejs
-  source $BIN_DIR/compile-nodejs "$@"
-bpwatch stop nodejs
-
-# Django collectstatic support.
-bpwatch start collectstatic
-  source $BIN_DIR/steps/collectstatic
-bpwatch stop collectstatic
 
 bpwatch stop compile
