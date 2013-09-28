@@ -255,7 +255,9 @@ bpwatch start anvil_appdir_commit
   fi
 bpwatch stop anvil_appdir_commit
 
-source $BIN_DIR/compile-nodejs "$@"
+bpwatch start nodejs
+  source $BIN_DIR/compile-nodejs "$@"
+bpwatch end nodejs
 
 # Django collectstatic support.
 bpwatch start collectstatic
