@@ -217,11 +217,6 @@ puts-step "Installing dependencies using Pip ($PIP_VERSION)"
 [ ! "$FRESH_PYTHON" ] && bpwatch stop pip_install
 [ "$FRESH_PYTHON" ] && bpwatch stop pip_install_first
 
-# Django collectstatic support.
-bpwatch start collectstatic
-  source $BIN_DIR/steps/collectstatic
-bpwatch stop collectstatic
-
 # ### Finalize
 #
 
@@ -261,5 +256,10 @@ bpwatch start anvil_appdir_commit
 bpwatch stop anvil_appdir_commit
 
 source $BIN_DIR/compile-nodejs "$@"
+
+# Django collectstatic support.
+bpwatch start collectstatic
+  source $BIN_DIR/steps/collectstatic
+bpwatch stop collectstatic
 
 bpwatch stop compile
